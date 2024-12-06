@@ -2,6 +2,9 @@ package com.listo.pms.tree;
 
 import com.listo.pms.model.Product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductBinaryTree {
     private BinaryTreeNode root;
 
@@ -83,15 +86,17 @@ public class ProductBinaryTree {
     }
 
     // In-order traversal (for testing purposes)
-    public void inOrder() {
-        inOrderRecursive(root);
+    public List<Product> inOrder() {
+        return inOrderRecursive(root, new ArrayList<>());
     }
 
-    private void inOrderRecursive(BinaryTreeNode node) {
+    private List<Product> inOrderRecursive(BinaryTreeNode node, List<Product> products) {
         if (node != null) {
-            inOrderRecursive(node.getLeft());
+            inOrderRecursive(node.getLeft(), products);
+            products.add(node.getProduct());
             System.out.println(node.getProduct().getName());
-            inOrderRecursive(node.getRight());
+            inOrderRecursive(node.getRight(), products);
         }
+        return products;
     }
 }

@@ -66,24 +66,25 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new RuntimeException("Product not found with id: " + id);
         }
+
         productRepository.deleteById(id);
     }
 
-//    public void deleteProductByName(String name){
-//        Product product = productTree.searchProduct(name);
-//        if (product != null) {
-//            productTree.deleteProduct(name);
-//            productRepository.deleteById(product.getId());
-//        }
-//
-//        if (!productRepository.existsById(product.getId())) {
-//            throw new RuntimeException("Product not found with name: " + name);
-//        }
-//        productRepository.deleteById(product.getId());
-//    }
+    public void deleteProductByName(String name){
+        Product product = productTree.searchProduct(name);
+        if (product != null) {
+            productTree.deleteProduct(name);
+            productRepository.deleteById(product.getId());
+        }
 
-    public void listProducts() {
-        productTree.inOrder();
+        if (!productRepository.existsById(product.getId())) {
+            throw new RuntimeException("Product not found with name: " + name);
+        }
+        productRepository.deleteById(product.getId());
+    }
+
+    public Product getProductFromTree(String name){
+        return productTree.searchProduct(name);
     }
 
     public Product updateProduct(int id, ProductBody productBody){
@@ -96,5 +97,9 @@ public class ProductService {
         Sort sort = sortDir.equalsIgnoreCase("asc") ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page, size, sort);
         return productRepository.findAll(pageable);
+    }
+
+    public List<Product> getSortedDataFromTree(){
+        return productTree.inOrder();
     }
 }

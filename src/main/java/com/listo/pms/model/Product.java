@@ -1,6 +1,7 @@
 package com.listo.pms.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class Product {
     private int id;
 
     @Column(name="name")
+    @Schema(description="Name of the product")
     private String name;
 
     public Category getCategory() {
@@ -50,6 +52,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int compareTo(Product other) {
