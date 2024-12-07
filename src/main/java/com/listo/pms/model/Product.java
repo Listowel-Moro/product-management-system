@@ -24,14 +24,6 @@ public class Product {
     @Schema(description="Name of the product")
     private String name;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference
@@ -44,22 +36,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", category=" + (category != null ? category.getName() : "null") +
                 '}';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int compareTo(Product other) {
