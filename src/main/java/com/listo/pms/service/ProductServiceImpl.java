@@ -102,4 +102,8 @@ public class ProductServiceImpl implements ProductService{
     public List<Product> getSortedDataFromTree(){
         return productTree.inOrder();
     }
+
+    public List<Product> getProductByCategory(String name){
+        return productRepository.findByCategoryName(name);
+    }
 }

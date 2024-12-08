@@ -26,5 +26,6 @@ public interface ProductService {
     public Page<Product> getSortedProducts(int page, int size, String sortBy, String sortDir);
 
     public List<Product> getSortedDataFromTree();
-}
 
+    public List<Product> getProductByCategory(String name);
+}

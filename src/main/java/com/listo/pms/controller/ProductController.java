@@ -114,4 +114,16 @@ public class ProductController {
                     .body(ResponseObject.createResponse("Product with name '" + name + "' not found", null, 404));
         }
     }
+
+    @Operation(summary = "Fetch category product", description = "Fetch all products in a specified category")
+    @GetMapping("/category/{name}")
+    public ResponseEntity<?> getProductByCategory(@PathVariable String name) {
+        try {
+            List<Product> products = productService.getProductByCategory(name);
+            return ResponseEntity.ok(ResponseObject.createResponse("Products fetched successfully from the category!", products, 200));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ResponseObject.createResponse("No product found in category '" + name, null, 404));
+        }
+    }
 }
