@@ -36,7 +36,6 @@ public class ProductServiceImpl implements ProductService{
         for (Product product : products) {
             productTree.addProduct(product);
         }
-        System.out.println("Binary tree prepopulated: ");
         productTree.inOrder();
 
     }

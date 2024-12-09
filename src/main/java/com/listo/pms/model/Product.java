@@ -26,7 +26,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    @JsonBackReference
+    //@JsonBackReference
     private Category category;
 
     @Override

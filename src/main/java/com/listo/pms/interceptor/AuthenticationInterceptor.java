@@ -21,7 +21,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             logger.error("Missing or invalid Authorization header.");
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Unauthorized: Missing or invalid Authorization token.");
             return false;
         }
