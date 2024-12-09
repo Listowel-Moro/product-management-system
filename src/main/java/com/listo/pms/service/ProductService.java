@@ -13,7 +13,7 @@ public interface ProductService {
 
     public List<Product> getProducts();
 
-    public Optional<Product> getProduct(int id);
+    public Product getProduct(int id);
 
     public void deleteProduct(int id);
 

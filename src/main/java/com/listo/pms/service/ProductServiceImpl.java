@@ -1,6 +1,7 @@
 package com.listo.pms.service;
 
 import com.listo.pms.dto.ProductBody;
+import com.listo.pms.exception.NotFoundException;
 import com.listo.pms.model.Category;
 import com.listo.pms.model.Product;
 import com.listo.pms.repository.ProductRepository;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -57,13 +57,13 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAllWithCategory();
     }
 
-    public Optional<Product> getProduct(int id){
-        return productRepository.findById(id);
+    public Product getProduct(int id){
+        return productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product with id: " + id + " is not found"));
     }
 
     public void deleteProduct(int id){
         if (!productRepository.existsById(id)) {
-            throw new RuntimeException("Product not found with id: " + id);
+            throw new NotFoundException("Product not found with id: " + id);
         }
 
         productRepository.deleteById(id);
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public Product updateProduct(int id, ProductBody productBody){
-        Product oldProduct = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+        Product oldProduct = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Category not found"));
         oldProduct.setName(productBody.getName());
         return productRepository.save(oldProduct);
     }

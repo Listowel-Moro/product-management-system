@@ -23,14 +23,9 @@ public class ProductController {
     @Operation(summary = "Add a new product", description = "Create a new product in the DB")
     @PostMapping("/add")
     public ResponseEntity<?> postProduct(@RequestBody ProductBody productDTO) {
-        try {
-            Product savedProduct = productService.saveProduct(productDTO);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(ResponseObject.createResponse("Product added successfully!", savedProduct, 201));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResponseObject.createResponse("Error saving product: " + e.getMessage(), null, 500));
-        }
+        Product savedProduct = productService.saveProduct(productDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ResponseObject.createResponse("Product added successfully!", savedProduct, 201));
     }
 
     @Operation(summary = "Fetch all products", description = "Fetch all products in the DB")
@@ -53,35 +48,24 @@ public class ProductController {
 
     @Operation(summary = "Fetch a product", description = "Fetch a single product from the DB")
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProduct(@PathVariable int id) {
-        return productService.getProduct(id)
-                .map(product -> ResponseEntity.ok(ResponseObject.createResponse("Product fetched successfully!", product, 200)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(ResponseObject.createResponse("Product with ID " + id + " not found", null, 404)));
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        Product product = productService.getProduct(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @Operation(summary = "Delete a product", description = "Delete a single product from the DB")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable int id) {
-        try {
             productService.deleteProduct(id);
             return ResponseEntity.ok(ResponseObject.createResponse("Product with ID " + id + " deleted successfully!", null, 204));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResponseObject.createResponse("Error deleting product: " + e.getMessage(), null, 500));
-        }
+
     }
 
     @Operation(summary = "Update a product", description = "Update a product from the DB")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable int id, @RequestBody ProductBody productBody) {
-        try {
-            Product updatedProduct = productService.updateProduct(id, productBody);
-            return ResponseEntity.ok(ResponseObject.createResponse("Product updated successfully!", updatedProduct, 200));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResponseObject.createResponse("Error updating product: " + e.getMessage(), null, 500));
-        }
+        Product updatedProduct = productService.updateProduct(id, productBody);
+        return ResponseEntity.ok(ResponseObject.createResponse("Product updated successfully!", updatedProduct, 200));
     }
 
     @Operation(summary = "Fetch all products", description = "Fetch all products in the Product Tree")
@@ -94,36 +78,21 @@ public class ProductController {
     @Operation(summary = "Delete a product", description = "Delete a product from the Product Tree and DB")
     @DeleteMapping("/tree/{name}")
     public ResponseEntity<?> deleteProductFromTree(@PathVariable String name) {
-        try {
-            productService.deleteProductByName(name);
-            return ResponseEntity.ok(ResponseObject.createResponse("Product '" + name + "' deleted successfully!", null, 204));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResponseObject.createResponse("Error deleting product: " + e.getMessage(), null, 500));
-        }
+        productService.deleteProductByName(name);
+        return ResponseEntity.ok(ResponseObject.createResponse("Product '" + name + "' deleted successfully!", null, 204));
     }
 
     @Operation(summary = "Fetch a product", description = "Fetch a single product from the Product tree")
     @GetMapping("/tree/{name}")
     public ResponseEntity<?> getProductFromTree(@PathVariable String name) {
-        try {
-            Product product = productService.getProductFromTree(name);
-            return ResponseEntity.ok(ResponseObject.createResponse("Product fetched successfully from the tree!", product, 200));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ResponseObject.createResponse("Product with name '" + name + "' not found", null, 404));
-        }
+        Product product = productService.getProductFromTree(name);
+        return ResponseEntity.ok(ResponseObject.createResponse("Product fetched successfully from the tree!", product, 200));
     }
 
     @Operation(summary = "Fetch category product", description = "Fetch all products in a specified category")
     @GetMapping("/category/{name}")
     public ResponseEntity<?> getProductByCategory(@PathVariable String name) {
-        try {
-            List<Product> products = productService.getProductByCategory(name);
-            return ResponseEntity.ok(ResponseObject.createResponse("Products fetched successfully from the category!", products, 200));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ResponseObject.createResponse("No product found in category '" + name, null, 404));
-        }
+        List<Product> products = productService.getProductByCategory(name);
+        return ResponseEntity.ok(ResponseObject.createResponse("Products fetched successfully from the category!", products, 200));
     }
 }
