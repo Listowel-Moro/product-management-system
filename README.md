@@ -47,10 +47,18 @@ The binary tree is populated during application startup using data from the data
 
 ## **API Endpoints**
 
-| HTTP Method | Endpoint         | Description                 |
-|-------------|------------------|-----------------------------|
-| `GET`       | `/api/products`  | Fetch all products          |
-| `POST`      | `/api/products`  | Add a new product           |
-| `PUT`       | `/api/products/{id}` | Update a product       |
-| `DELETE`    | `/api/products/{id}` | Delete a product       |
-| `GET`       | `/api/products/{id}` | Fetch a product by ID  |
+| HTTP Method | Endpoint                        | Description                    |
+|-------------|---------------------------------|--------------------------------|
+| `GET`       | `/api/products`                 | Fetch all products             |
+| `POST`      | `/api/products`                 | Add a new product              |
+| `PUT`       | `/api/products/{id}`            | Update a product               |
+| `DELETE`    | `/api/products/{id}`            | Delete a product               |
+| `GET`       | `/api/products/{id}`            | Fetch a product by ID          |
+| `GET`       | `/api/products/tree/{name}`     | Fetch a product by name        |
+| `DELETE`    | `/api/products/tree/{name}`     | Delete a product by name       |
+| `Get`       | `/api/products/tree/sort`       | Fetch sorted paginated products |
+| `Get`       | `/api/products/category/{name}` | Fetch category products        |
+| `POST`      | `/api/category`                 | Add a category                 |
+| `Get`       | `/api/category`                 | Fetch category                 |
+| `Get`       | `/api/reviews/{productId`       | Fetch product reviews          |
+| `POST`      | `/api/reviews/{productId`       | Add review to product   |
