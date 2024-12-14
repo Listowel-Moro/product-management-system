@@ -42,6 +42,7 @@ public class ProductServiceImpl implements ProductService{
 
     public Product saveProduct(ProductBody productBody){
         String name = productBody.getName();
+
         int categoryId = productBody.getCategoryId();
         Product newProduct = new Product();
         newProduct.setName(name);
@@ -87,7 +88,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public Product updateProduct(int id, ProductBody productBody){
-        Product oldProduct = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Category not found"));
+        Product oldProduct = productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
         oldProduct.setName(productBody.getName());
         return productRepository.save(oldProduct);
     }

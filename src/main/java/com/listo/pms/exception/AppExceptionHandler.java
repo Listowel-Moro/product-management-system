@@ -1,6 +1,7 @@
 package com.listo.pms.exception;
 
 import com.listo.pms.util.ApiError;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDate;
 
+@Hidden
 @ControllerAdvice
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 

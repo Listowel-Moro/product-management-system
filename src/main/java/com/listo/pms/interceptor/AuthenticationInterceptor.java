@@ -28,10 +28,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         String token = authHeader.substring(BEARER_PREFIX.length());
 
-        // Validate the token (this could be done by verifying JWT or calling an auth service)
+        // Validate the token
         if (!isValidToken(token)) {
             logger.error("Invalid token: {}", token);
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Unauthorized: Invalid token.");
             return false;
         }
