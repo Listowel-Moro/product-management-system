@@ -1,7 +1,3 @@
-Here’s a well-structured **README.md** template for your Product Management System project. You can customize it further as needed.
-
----
-
 # **Product Management System**
 
 ## **Table of Contents**
