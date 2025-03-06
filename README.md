@@ -38,7 +38,7 @@ The application uses a custom binary tree structure for product categorization. 
 - **Deletion:** Products are efficiently removed while maintaining tree integrity.
 - **Search:** Quick lookup by product name.
 
-The binary tree is populated during application startup using data from the database (`@PostConstruct`).
+The binary tree is populated during application startup using data from the database
 
 ---
 
