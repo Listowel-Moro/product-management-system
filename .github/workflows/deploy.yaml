@@ -1,0 +1,26 @@
+name: Push Docker Image to ECR
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  push_to_ecr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t $ECR_REPO:latest .
+          docker tag $ECR_REPO:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
+
+      - name: Push Docker image to ECR
+        run: |
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
