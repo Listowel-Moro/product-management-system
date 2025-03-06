@@ -1,11 +1,11 @@
 # Use an official OpenJDK 21 runtime as base image
-FROM eclipse-temurin:21-jdk
+FROM openjdk:21-jdk-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the built JAR file from the target directory to the container
-COPY target/product-management-system.jar app.jar
+COPY target/ProductManagementSystem-1.0.0.jar app.jar
 
 # Expose the application port
 EXPOSE 8080
