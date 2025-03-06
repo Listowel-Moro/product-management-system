@@ -30,7 +30,7 @@ The Product Management System (PMS) is a Spring Boot application designed to hel
 - **Backend:** Spring Boot (REST API, Spring Data JPA)
 - **Database:** MySQL
 - **Binary Tree:** Custom implementation in Java
-- **Tools:** Maven, IntelliJ IDEA
+- **Tools:** Maven, IntelliJ IDEA, Docker
 
 ## **Binary Tree Integration**
 
