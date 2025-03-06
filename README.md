@@ -22,6 +22,7 @@ The Product Management System (PMS) is a Spring Boot application designed to hel
 - Multiple profiles (Development and Production) for flexible deployment.
 - API documentation using Swagger.
 - Modular and scalable architecture.
+- Github Actions for CI/CD.
 
 ---
 
